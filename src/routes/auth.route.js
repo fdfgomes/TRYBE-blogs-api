@@ -6,7 +6,7 @@ const authController = require('../controllers/auth.controller');
 router.post(
   '/login',
   authMiddleware.validateReceivedProperties,
-  authController.signIn
+  authController.signIn,
 );
 
 module.exports = router;
