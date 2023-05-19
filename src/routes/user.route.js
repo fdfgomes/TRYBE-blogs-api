@@ -13,6 +13,8 @@ router.post(
   userController.create,
 );
 
+router.get('/:id', authMiddleware.validateToken, userController.findById);
+
 router.get('/', authMiddleware.validateToken, userController.findAll);
 
 module.exports = router;
