@@ -27,6 +27,20 @@ const create = async (user) => {
   }
 };
 
+const findAll = async () => {
+  try {
+    const users = await User.findAll({
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    return response(RESPONSE_TYPES.OK, users);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
+  findAll,
 };
