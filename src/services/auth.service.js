@@ -1,6 +1,5 @@
 const { User } = require('../models');
 const RESPONSE_TYPES = require('../constants/RESPONSE_TYPES');
-
 const authHelpers = require('../helpers/auth.helper');
 
 const response = (type, data, message = '') => ({

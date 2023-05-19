@@ -2,6 +2,9 @@ const express = require('express');
 
 const app = express();
 
+const authRoutes = require('./routes/auth.route');
+const userRoutes = require('./routes/user.route');
+
 // não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
   response.send();
@@ -9,9 +12,8 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 
-const authRoutes = require('./routes/auth.route');
-
 app.use('/', authRoutes);
+app.use('/user', userRoutes);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
