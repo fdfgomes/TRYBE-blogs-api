@@ -19,6 +19,16 @@ const create = async (name) => {
   }
 };
 
+const findAll = async () => {
+  try {
+    const categories = await Category.findAll();
+    return response(RESPONSE_TYPES.OK, categories);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
+  findAll,
 };

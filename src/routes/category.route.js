@@ -11,4 +11,10 @@ router.post(
   categoryController.create,
 );
 
+router.get(
+  '/',
+  authMiddleware.validateToken,
+  categoryController.findAll,
+);
+
 module.exports = router;
