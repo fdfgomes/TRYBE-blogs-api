@@ -10,6 +10,7 @@ const CategorySchema = (sequelize, DataTypes) => {
     },
     {
       tableName: 'categories',
+      timestamps: false,
     }
   );
 
