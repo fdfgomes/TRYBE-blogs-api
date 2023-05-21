@@ -1,6 +1,6 @@
-const PostSchema = (sequelize, DataTypes) => {
-  const PostModel = sequelize.define(
-    'Post',
+const BlogPostSchema = (sequelize, DataTypes) => {
+  const BlogPostModel = sequelize.define(
+    'BlogPost',
     {
       id: {
         primaryKey: true,
@@ -19,14 +19,14 @@ const PostSchema = (sequelize, DataTypes) => {
     }
   );
 
-  PostModel.associate = (models) => {
-    PostModel.belongsTo(models.User, {
+  BlogPostModel.associate = (models) => {
+    BlogPostModel.belongsTo(models.User, {
       as: 'user',
       foreignKey: 'userId',
     });
   };
 
-  return PostModel;
+  return BlogPostModel;
 };
 
-module.exports = PostSchema;
+module.exports = BlogPostSchema;
