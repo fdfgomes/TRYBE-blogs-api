@@ -1,11 +1,6 @@
+const ERROR_MESSAGES = require('../constants/ERROR_MESSAGES');
 const RESPONSE_TYPES = require('../constants/RESPONSE_TYPES');
 const authHelpers = require('../helpers/auth.helper');
-
-const ERROR_MESSAGES = {
-  EXPIRED_OR_INVALID_TOKEN: 'Expired or invalid token',
-  MISSING_REQUIRED_FIELDS: 'Some required fields are missing',
-  TOKEN_NOT_FOUND: 'Token not found',
-};
 
 const validateReceivedProperties = (req, res, next) => {
   try {
@@ -34,6 +29,10 @@ const validateToken = (req, res, next) => {
     const tokenIsValid = authHelpers.validateToken(authorization);
 
     if (!tokenIsValid) throw new Error(ERROR_MESSAGES.EXPIRED_OR_INVALID_TOKEN);
+
+    req.user = {
+      ...tokenIsValid.data,
+    };
   } catch (err) {
     const status = [
       ERROR_MESSAGES.TOKEN_NOT_FOUND,
