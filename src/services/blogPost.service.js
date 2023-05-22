@@ -57,7 +57,29 @@ const findAll = async () => {
   }
 };
 
+const findById = async (postId) => {
+  try {
+    const post = await BlogPost.findOne({
+      where: { id: postId },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: { exclude: ['password'] },
+        },
+        // https://stackoverflow.com/questions/45070595/sequelize-exclude-belongs-to-many-mapping-object
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    if (!post) return response(RESPONSE_TYPES.NOT_FOUND, null, 'Post does not exist');
+    return response(RESPONSE_TYPES.OK, post);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };

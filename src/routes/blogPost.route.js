@@ -13,6 +13,7 @@ router.post(
   blogPostController.create,
 );
 
+router.get('/:id', authMiddleware.validateToken, blogPostController.findById);
 router.get('/', authMiddleware.validateToken, blogPostController.findAll);
 
 module.exports = router;
