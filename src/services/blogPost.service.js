@@ -1,5 +1,11 @@
 const RESPONSE_TYPES = require('../constants/RESPONSE_TYPES');
-const { sequelize, BlogPost, PostCategory } = require('../models');
+const {
+  sequelize,
+  BlogPost,
+  PostCategory,
+  User,
+  Category,
+} = require('../models');
 
 const response = (type, data, message = '') => ({
   status: type,
@@ -32,6 +38,26 @@ const create = async (userId, { title, content, categoryIds }) => {
   }
 };
 
+const findAll = async () => {
+  try {
+    const posts = await BlogPost.findAll({
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: { exclude: ['password'] },
+        },
+        // https://stackoverflow.com/questions/45070595/sequelize-exclude-belongs-to-many-mapping-object
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    return response(RESPONSE_TYPES.OK, posts);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
+  findAll,
 };

@@ -13,4 +13,6 @@ router.post(
   blogPostController.create,
 );
 
+router.get('/', authMiddleware.validateToken, blogPostController.findAll);
+
 module.exports = router;
