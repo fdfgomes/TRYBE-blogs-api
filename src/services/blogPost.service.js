@@ -78,8 +78,19 @@ const findById = async (postId) => {
   }
 };
 
+const update = async (userId, postId, { title, content }) => {
+  try {
+    await BlogPost.update({ title, content }, { where: { id: postId, userId } });
+    const { data: updatedPost } = await findById(postId);
+    return response(RESPONSE_TYPES.OK, updatedPost);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  update,
 };

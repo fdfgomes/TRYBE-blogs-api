@@ -14,6 +14,16 @@ router.post(
 );
 
 router.get('/:id', authMiddleware.validateToken, blogPostController.findById);
+
 router.get('/', authMiddleware.validateToken, blogPostController.findAll);
+
+router.put(
+  '/:id',
+  authMiddleware.validateToken,
+  blogPostMiddleware.validateAuthor,
+  blogPostMiddleware.validateTitle,
+  blogPostMiddleware.validateContent,
+  blogPostController.update,
+);
 
 module.exports = router;

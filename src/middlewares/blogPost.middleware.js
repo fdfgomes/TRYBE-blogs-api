@@ -1,6 +1,6 @@
 const ERROR_MESSAGES = require('../constants/ERROR_MESSAGES');
 const RESPONSE_TYPES = require('../constants/RESPONSE_TYPES');
-const { Category } = require('../models');
+const { BlogPost, Category } = require('../models');
 
 const validateTitle = (req, res, next) => {
   try {
@@ -63,8 +63,30 @@ const validateCategoryIds = async (req, res, next) => {
   next();
 };
 
+const validateAuthor = async (req, res, next) => {
+  try {
+    const { id: postId } = req.params;
+    const { userId } = await BlogPost.findOne({
+      where: {
+        id: postId,
+      },
+    });
+    if (userId !== req.user.id) {
+      return res
+        .status(RESPONSE_TYPES.UNAUTHORIZED)
+        .json({ message: 'Unauthorized user' });
+    }
+  } catch (err) {
+    return res
+      .status(RESPONSE_TYPES.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message });
+  }
+  next();
+};
+
 module.exports = {
   validateTitle,
   validateContent,
   validateCategoryIds,
+  validateAuthor,
 };
