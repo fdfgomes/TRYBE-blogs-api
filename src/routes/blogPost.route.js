@@ -26,4 +26,12 @@ router.put(
   blogPostController.update,
 );
 
+router.delete(
+  '/:id',
+  authMiddleware.validateToken,
+  blogPostMiddleware.validateBlogPost,
+  blogPostMiddleware.validateAuthor,
+  blogPostController.deleteById,
+);
+
 module.exports = router;

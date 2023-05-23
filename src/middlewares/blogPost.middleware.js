@@ -84,9 +84,31 @@ const validateAuthor = async (req, res, next) => {
   next();
 };
 
+const validateBlogPost = async (req, res, next) => {
+  try {
+    const { id: postId } = req.params;
+    const blogPost = await BlogPost.findOne({
+      where: {
+        id: postId,
+      },
+    });
+    if (!blogPost) {
+      return res
+        .status(RESPONSE_TYPES.NOT_FOUND)
+        .json({ message: 'Post does not exist' });
+    }
+  } catch (err) {
+    return res
+      .status(RESPONSE_TYPES.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message });
+  }
+  next();
+};
+
 module.exports = {
   validateTitle,
   validateContent,
   validateCategoryIds,
   validateAuthor,
+  validateBlogPost,
 };

@@ -80,9 +80,21 @@ const findById = async (postId) => {
 
 const update = async (userId, postId, { title, content }) => {
   try {
-    await BlogPost.update({ title, content }, { where: { id: postId, userId } });
+    await BlogPost.update(
+      { title, content },
+      { where: { id: postId, userId } },
+    );
     const { data: updatedPost } = await findById(postId);
     return response(RESPONSE_TYPES.OK, updatedPost);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
+const deleteById = async (postId) => {
+  try {
+    await BlogPost.destroy({ where: { id: postId } });
+    return response(RESPONSE_TYPES.NO_CONTENT, null);
   } catch (err) {
     return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
   }
@@ -93,4 +105,5 @@ module.exports = {
   findAll,
   findById,
   update,
+  deleteById,
 };
