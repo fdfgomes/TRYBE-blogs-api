@@ -13,6 +13,12 @@ router.post(
   blogPostController.create,
 );
 
+router.get(
+  '/search',
+  authMiddleware.validateToken,
+  blogPostController.findAllBySearchTerm,
+);
+
 router.get('/:id', authMiddleware.validateToken, blogPostController.findById);
 
 router.get('/', authMiddleware.validateToken, blogPostController.findAll);

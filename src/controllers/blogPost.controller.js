@@ -28,6 +28,24 @@ const findById = async (req, res) => {
   return res.status(status).json(data);
 };
 
+const findAllBySearchTerm = async (req, res) => {
+  const { q: searchTerm } = req.query;
+
+  let response = { status: '', data: null, message: '' };
+
+  if (searchTerm) {
+    response = await blogPostService.findAllBySearchTerm(searchTerm);
+  } else {
+    response = await blogPostService.findAll();
+  }
+
+  const { status, data, message } = response;
+
+  if (message) return res.status(status).json({ message });
+
+  return res.status(status).json(data);
+};
+
 const update = async (req, res) => {
   const updatedPost = req.body;
   const { id: postId } = req.params;
@@ -46,5 +64,6 @@ module.exports = {
   deleteById,
   findAll,
   findById,
+  findAllBySearchTerm,
   update,
 };

@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const RESPONSE_TYPES = require('../constants/RESPONSE_TYPES');
 const {
   sequelize,
@@ -87,6 +88,27 @@ const findById = async (postId) => {
   }
 };
 
+const findAllBySearchTerm = async (searchTerm) => {
+  try {
+    const posts = await BlogPost.findAll({
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        // https://stackoverflow.com/questions/45070595/sequelize-exclude-belongs-to-many-mapping-object
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${searchTerm}%` } },
+          { content: { [Op.like]: `%${searchTerm}%` } },
+        ],
+      },
+    });
+    return response(RESPONSE_TYPES.OK, posts);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 const update = async (userId, postId, { title, content }) => {
   try {
     await BlogPost.update(
@@ -105,5 +127,6 @@ module.exports = {
   deleteById,
   findAll,
   findById,
+  findAllBySearchTerm,
   update,
 };
