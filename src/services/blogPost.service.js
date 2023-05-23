@@ -38,6 +38,15 @@ const create = async (userId, { title, content, categoryIds }) => {
   }
 };
 
+const deleteById = async (postId) => {
+  try {
+    await BlogPost.destroy({ where: { id: postId } });
+    return response(RESPONSE_TYPES.NO_CONTENT, null);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 const findAll = async () => {
   try {
     const posts = await BlogPost.findAll({
@@ -91,19 +100,10 @@ const update = async (userId, postId, { title, content }) => {
   }
 };
 
-const deleteById = async (postId) => {
-  try {
-    await BlogPost.destroy({ where: { id: postId } });
-    return response(RESPONSE_TYPES.NO_CONTENT, null);
-  } catch (err) {
-    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
-  }
-};
-
 module.exports = {
   create,
+  deleteById,
   findAll,
   findById,
   update,
-  deleteById,
 };

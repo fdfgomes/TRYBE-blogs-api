@@ -8,6 +8,13 @@ const create = async (req, res) => {
   return res.status(status).json(data);
 };
 
+const deleteById = async (req, res) => {
+  const { id: postId } = req.params;
+  const { status, data, message } = await blogPostService.deleteById(postId);
+  if (message) return res.status(status).json({ message });
+  return res.status(status).json(data);
+};
+
 const findAll = async (req, res) => {
   const { status, data, message } = await blogPostService.findAll();
   if (message) return res.status(status).json({ message });
@@ -34,17 +41,10 @@ const update = async (req, res) => {
   return res.status(status).json(data);
 };
 
-const deleteById = async (req, res) => {
-  const { id: postId } = req.params;
-  const { status, data, message } = await blogPostService.deleteById(postId);
-  if (message) return res.status(status).json({ message });
-  return res.status(status).json(data);
-};
-
 module.exports = {
   create,
+  deleteById,
   findAll,
   findById,
   update,
-  deleteById,
 };

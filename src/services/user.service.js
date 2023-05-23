@@ -61,8 +61,18 @@ const findById = async (userId) => {
   }
 };
 
+const deleteById = async (userId) => {
+  try {
+    await User.destroy({ where: { id: userId } });
+    return response(RESPONSE_TYPES.NO_CONTENT, null);
+  } catch (err) {
+    return response(RESPONSE_TYPES.INTERNAL_SERVER_ERROR, null, err.message);
+  }
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  deleteById,
 };
