@@ -13,10 +13,10 @@ router.post(
   userController.create,
 );
 
+router.delete('/me', authMiddleware.validateToken, userController.deleteById);
+
 router.get('/:id', authMiddleware.validateToken, userController.findById);
 
 router.get('/', authMiddleware.validateToken, userController.findAll);
-
-router.delete('/me', authMiddleware.validateToken, userController.deleteById);
 
 module.exports = router;
