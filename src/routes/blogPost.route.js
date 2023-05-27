@@ -13,6 +13,23 @@ router.post(
   blogPostController.create,
 );
 
+router.delete(
+  '/:id',
+  authMiddleware.validateToken,
+  blogPostMiddleware.validateBlogPost,
+  blogPostMiddleware.validateAuthor,
+  blogPostController.deleteById,
+);
+
+router.put(
+  '/:id',
+  authMiddleware.validateToken,
+  blogPostMiddleware.validateAuthor,
+  blogPostMiddleware.validateTitle,
+  blogPostMiddleware.validateContent,
+  blogPostController.updateById,
+);
+
 router.get(
   '/search',
   authMiddleware.validateToken,
@@ -22,22 +39,5 @@ router.get(
 router.get('/:id', authMiddleware.validateToken, blogPostController.findById);
 
 router.get('/', authMiddleware.validateToken, blogPostController.findAll);
-
-router.put(
-  '/:id',
-  authMiddleware.validateToken,
-  blogPostMiddleware.validateAuthor,
-  blogPostMiddleware.validateTitle,
-  blogPostMiddleware.validateContent,
-  blogPostController.update,
-);
-
-router.delete(
-  '/:id',
-  authMiddleware.validateToken,
-  blogPostMiddleware.validateBlogPost,
-  blogPostMiddleware.validateAuthor,
-  blogPostController.deleteById,
-);
 
 module.exports = router;

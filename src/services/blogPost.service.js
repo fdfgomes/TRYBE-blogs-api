@@ -109,7 +109,7 @@ const findAllBySearchTerm = async (searchTerm) => {
   }
 };
 
-const update = async (userId, postId, { title, content }) => {
+const updateById = async (userId, postId, { title, content }) => {
   try {
     await BlogPost.update(
       { title, content },
@@ -128,5 +128,5 @@ module.exports = {
   findAll,
   findById,
   findAllBySearchTerm,
-  update,
+  updateById,
 };
