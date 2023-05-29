@@ -4,7 +4,7 @@
 
 O objetivo deste projeto foi construir uma API, seguindo os princípios _REST_ e o padrão arquitetural _MSC_ _(models, views e controllers)_, para gerenciar um blog.
 
-## Tecnologias utilizadas
+### Tecnologias utilizadas
 
 - Docker <img src="https://skillicons.dev/icons?i=docker" height="19em" />;
 - Banco de dados _MySQL_ <img src="https://skillicons.dev/icons?i=mysql" height="19em" />;
@@ -13,7 +13,7 @@ O objetivo deste projeto foi construir uma API, seguindo os princípios _REST_ e
 
 <!-- desenvolvida em Node.js utilizando o _framework_ `Express.js` e o _ORM_ `Sequelize`, seguindo o padrão arquitetural _MSC_ _(models, views e controllers)_. -->
 
-## Rotas criadas
+# Rotas criadas
 
 ### **POST** _`/user`_
 
@@ -1323,8 +1323,6 @@ Authorization: eyJhbGci...
 
     <br />
   </details>
-
-<br />
 
 # Rodando o projeto localmente
 
