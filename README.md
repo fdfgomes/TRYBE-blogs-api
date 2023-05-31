@@ -6,7 +6,7 @@ A proposta deste projeto era construir uma API, seguindo boas práticas de desen
 
 ### O desenvolvimento incluiu:
 
-- criação e configuração de um banco de dados _MySQL_ utilizando o _ORM Sequelize_ _(migrations, seeders e models)_;
+- criação e configuração de um banco de dados _MySQL_ utilizando o _ORM Sequelize_;
 - construção de uma API seguindo os princípios _REST_ e padrão arquitetural _MSC_ _(models, services e controllers)_;
 - autenticação de usuários utilizando web tokens _(JWT)_;
 - utilização de _middlewares_ para validação de dados recebidos através das requisições _HTTP_.
