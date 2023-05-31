@@ -2,7 +2,14 @@
 
 > _Projeto desenvolvido durante o módulo de back-end do curso de desenvolvimento web da [Trybe](https://www.betrybe.com/)._
 
-O objetivo deste projeto foi construir uma API, seguindo os princípios _REST_ e o padrão arquitetural _MSC_ _(models, views e controllers)_, para gerenciar um blog.
+O objetivo deste projeto foi construir uma API para gerenciar o conteúdo de um blog, aplicando os conteúdos estutados durante as aulas.
+
+O desenvolvimento incluiu:
+
+- criação e configuração de um banco de dados _(migrations, seeders e models)_;
+- construção de uma API seguindo os princípios _REST_ e padrão arquitetural _MSC_ _(models, services e controllers)_;
+- autenticação de usuários utilizando web tokens _(JWT)_;
+- utilização de _middlewares_ para validação de dados recebidos pelas requisições _HTTP_.
 
 ### Tecnologias utilizadas
 
