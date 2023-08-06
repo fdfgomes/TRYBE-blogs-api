@@ -1336,8 +1336,8 @@ Authorization: eyJhbGci...
 #### Clone o repositório e inicialize os containers do projeto:
 
 ```
-git clone git@github.com:fdfgomes/TRYBE-blogs-api.git
-cd TRYBE-blogs-api
+git clone git@github.com:fdfgomes/blogs-api.git
+cd blogs-api
 docker-compose up -d
 ```
 
@@ -1348,19 +1348,9 @@ docker exec -it blogs_api bash
 npm install
 ```
 
-#### Execute os comandos do _Sequelize_ para criar e popular o banco de dados:
-
-> _**Obs.:** Como no passo anterior, é necessário executar os comandos a seguir dentro do container da API._
-
-```
-npx sequelize-cli db:create
-npx sequelize-cli db:migrate
-npx sequelize-cli db:seed:all
-```
-
 #### Para inicializar o servidor de desenvolvimento utilize o comando:
 
-> _**Obs.:** Como no passo anterior, é necessário executar o comando a seguir dentro do container da API._
+> _**Obs.:** É necessário executar o comando a seguir dentro do container da API._
 
 ```
 npm run dev
